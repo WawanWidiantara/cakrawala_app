@@ -1,0 +1,33 @@
+name: cakrawala_app
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.5.4
+
+dependencies:
+  cupertino_icons: ^1.0.8
+  flutter:
+    sdk: flutter
+  flutter_svg: ^2.0.16
+  get: ^4.6.6
+  get_storage: ^2.1.1
+  google_fonts: ^6.2.1
+  http: ^1.2.2
+  image_picker: ^1.1.2
+  intl: ^0.20.1
+  string_extensions: ^0.7.3
+  transitioned_indexed_stack: ^1.0.2
+
+dev_dependencies:
+  flutter_lints: ^4.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/images/
+    - assets/models/
