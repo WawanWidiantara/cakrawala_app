@@ -3,6 +3,7 @@ import 'package:cakrawala_app/app/core/components/forms.dart';
 import 'package:cakrawala_app/app/core/constants/colors.dart';
 import 'package:cakrawala_app/app/core/constants/text_styles.dart';
 import 'package:cakrawala_app/app/modules/ocr/controllers/ocr_result_controller.dart';
+import 'package:cakrawala_app/app/modules/ocr/views/ocr_success_view.dart';
 import 'package:cakrawala_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
@@ -256,7 +257,13 @@ class OcrResultView extends GetView<OcrResultController> {
                                         state: ButtonState.enabled,
                                         onPressed: () {
                                           Navigator.pop(context);
-                                          Get.offAllNamed(Routes.NAVBAR);
+                                          Get.offAll(
+                                            () => const OcrSuccessView(),
+                                            transition: Transition.fadeIn,
+                                            duration: const Duration(
+                                              milliseconds: 500,
+                                            ),
+                                          );
                                         },
                                       ),
                                     ),

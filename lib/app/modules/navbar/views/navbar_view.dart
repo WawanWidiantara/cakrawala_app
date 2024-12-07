@@ -19,7 +19,7 @@ class NavbarView extends GetView<NavbarController> {
           beginOpacity: 0.0,
           endOpacity: 1.0,
           curve: Curves.easeInOut,
-          duration: const Duration(milliseconds: 200),
+          duration: const Duration(milliseconds: 100),
           index: controller.tabIndex,
           children: const [
             HomeView(),
