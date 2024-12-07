@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 
 import '../modules/auth/bindings/auth_binding.dart';
-
 import '../modules/auth/views/auth_view.dart';
 import '../modules/favorite/bindings/favorite_binding.dart';
 import '../modules/favorite/views/favorite_view.dart';
@@ -11,6 +10,8 @@ import '../modules/navbar/bindings/navbar_binding.dart';
 import '../modules/navbar/views/navbar_view.dart';
 import '../modules/notification/bindings/notification_binding.dart';
 import '../modules/notification/views/notification_view.dart';
+import '../modules/ocr/bindings/ocr_binding.dart';
+import '../modules/ocr/views/ocr_view.dart';
 import '../modules/on_boarding/bindings/on_boarding_binding.dart';
 import '../modules/on_boarding/views/on_boarding_view.dart';
 import '../modules/product/bindings/product_binding.dart';
@@ -65,6 +66,11 @@ class AppPages {
       name: _Paths.NAVBAR,
       page: () => const NavbarView(),
       binding: NavbarBinding(),
+    ),
+    GetPage(
+      name: _Paths.OCR,
+      page: () => const OcrView(),
+      binding: OcrBinding(),
     ),
   ];
 }

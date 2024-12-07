@@ -12,6 +12,7 @@ abstract class Routes {
   static const ON_BOARDING = _Paths.ON_BOARDING;
   static const NAVBAR = _Paths.NAVBAR;
   static const LOGIN = _Paths.AUTH + _Paths.LOGIN;
+  static const OCR = _Paths.OCR;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const ON_BOARDING = '/on-boarding';
   static const NAVBAR = '/navbar';
   static const LOGIN = '/login';
+  static const OCR = '/ocr';
 }

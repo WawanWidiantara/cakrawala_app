@@ -6,6 +6,6 @@ class AppColors {
   static const Color ambientColor = Color(0xFFCBD7FF);
   static const Color formFill = Color(0xFFEDEDEE);
   static const Color formStroke = Color(0xFFC0C0C0);
-  static const Color mainBackground = Color(0xFFEDEDEE);
+  static const Color mainBackground = Color(0xFFFAFAFA);
   static const Color warning = Color(0xFFF0EA45);
 }
