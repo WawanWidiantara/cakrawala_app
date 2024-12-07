@@ -3,6 +3,7 @@ import 'package:cakrawala_app/app/core/constants/colors.dart';
 import 'package:cakrawala_app/app/core/constants/text_styles.dart';
 import 'package:cakrawala_app/app/modules/auth/views/login_view.dart';
 import 'package:cakrawala_app/app/modules/auth/views/register_view.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -62,21 +63,40 @@ class OnBoardingView extends GetView<OnBoardingController> {
 
 // ImageOnBoarding widget
 class ImageOnBoarding extends StatelessWidget {
-  const ImageOnBoarding({
-    super.key,
-  });
+  const ImageOnBoarding({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: Get.height * 0.4,
-      decoration: BoxDecoration(
-        image: const DecorationImage(
-          image: AssetImage('assets/images/on-boarding-1.jpg'),
-          fit: BoxFit.cover,
-        ),
-        borderRadius: BorderRadius.circular(7),
+    final List<String> images = [
+      'assets/images/on-boarding-1.jpg',
+      'assets/images/on-boarding-2.jpg',
+      'assets/images/on-boarding-3.jpg',
+    ];
+
+    return CarouselSlider(
+      options: CarouselOptions(
+        height: Get.height * 0.4,
+        autoPlay: true,
+        enlargeCenterPage: true,
+        enableInfiniteScroll: true,
+        viewportFraction: 1,
+        aspectRatio: 16 / 9,
       ),
+      items: images.map((image) {
+        return Builder(
+          builder: (BuildContext context) {
+            return Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(7),
+                image: DecorationImage(
+                  image: AssetImage(image),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            );
+          },
+        );
+      }).toList(),
     );
   }
 }
@@ -95,6 +115,7 @@ class Headline extends StatelessWidget {
         color: Colors.black,
         fontWeight: FontWeight.bold,
         letterSpacing: 1.5,
+        height: 1.2,
       ),
     );
   }

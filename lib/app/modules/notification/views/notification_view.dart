@@ -1,3 +1,4 @@
+import 'package:cakrawala_app/app/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -9,9 +10,12 @@ class NotificationView extends GetView<NotificationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.mainBackground,
       appBar: AppBar(
-        title: const Text('NotificationView'),
-        centerTitle: true,
+        iconTheme: const IconThemeData(
+          color: AppColors.mainBackground,
+        ),
+        backgroundColor: AppColors.primaryColor,
       ),
       body: const Center(
         child: Text(

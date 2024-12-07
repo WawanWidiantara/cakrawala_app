@@ -1,5 +1,6 @@
 import 'package:cakrawala_app/app/core/constants/colors.dart';
 import 'package:cakrawala_app/app/core/constants/text_styles.dart';
+import 'package:cakrawala_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -15,7 +16,9 @@ class HomeView extends GetView<HomeController> {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(Routes.NOTIFICATION);
+            },
             icon: const Icon(
               Icons.notifications_none_rounded,
               color: AppColors.mainBackground,
