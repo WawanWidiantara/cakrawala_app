@@ -1,5 +1,6 @@
 import 'package:cakrawala_app/app/core/constants/colors.dart';
 import 'package:cakrawala_app/app/core/constants/text_styles.dart';
+import 'package:cakrawala_app/app/modules/product/views/detail_product_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -47,6 +48,11 @@ class FavoriteView extends GetView<FavoriteController> {
                       child: FavoriteCard(
                         controller: controller,
                         index: index,
+                        onPressed: () {
+                          Get.to(
+                            () => const DetailProductView(),
+                          );
+                        },
                       ),
                     );
                   },
@@ -65,10 +71,12 @@ class FavoriteCard extends StatelessWidget {
     super.key,
     required this.controller,
     required this.index,
+    required this.onPressed,
   });
 
   final FavoriteController controller;
   final int index;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -115,13 +123,13 @@ class FavoriteCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CardInfo(),
-                CardButton(),
+                const CardInfo(),
+                CardButton(onPressed: onPressed),
               ],
             ),
           ),
@@ -135,14 +143,17 @@ class FavoriteCard extends StatelessWidget {
 class CardButton extends StatelessWidget {
   const CardButton({
     super.key,
+    required this.onPressed,
   });
+
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 32,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primaryColor,
         ),
