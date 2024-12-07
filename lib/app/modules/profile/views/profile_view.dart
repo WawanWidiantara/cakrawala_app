@@ -54,7 +54,7 @@ class ProfileView extends GetView<ProfileController> {
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: AppColors.formFill,
+                  color: AppColors.white,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Column(
@@ -79,7 +79,7 @@ class ProfileView extends GetView<ProfileController> {
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: AppColors.formFill,
+                  color: AppColors.white,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Column(

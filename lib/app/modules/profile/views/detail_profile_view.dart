@@ -45,7 +45,7 @@ class DetailProfileView extends GetView {
                 width: double.infinity,
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppColors.formFill,
+                  color: AppColors.white,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Column(
