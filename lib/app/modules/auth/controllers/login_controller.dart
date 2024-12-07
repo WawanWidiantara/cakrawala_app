@@ -1,3 +1,4 @@
+import 'package:cakrawala_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,6 +27,6 @@ class LoginController extends GetxController {
   void increment() => count.value++;
   void login() {
     print('login');
-    // Get.toNamed('/home');
+    Get.offAllNamed(Routes.NAVBAR);
   }
 }

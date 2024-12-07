@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:cakrawala_app/app/modules/ocr/views/ocr_result_view.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
 import 'package:get/get.dart';
@@ -36,41 +37,40 @@ class OcrController extends GetxController {
     if (pickedFile != null) {
       File receiptImage = File(pickedFile.path);
       selectedImage.value = pickedFile.path.toString();
-      ktpResult.clear(); // Uncomment if you want to navigate to PicOcrView
-
-      // sendImage(
-      //     receiptImage); // Wait for the image to be sent before proceeding
+      ktpResult.clear();
+      Get.to(arguments: ktpResult, () => const OcrResultView());
     } else {
       print('No image selected.');
     }
   }
 
-  // Future<void> sendImage(File image) async {
-  //   var url = Uri.parse("${UrlApi.baseAPI}/extract/");
-  //   var token = 'Bearer ${loginController.getStorage.read("access_token")}';
+//  Future<void> sendImage(File image) async {
+//     var url = Uri.parse("${UrlApi.baseAPI}/extract/");
+//     var token = 'Bearer ${loginController.getStorage.read("access_token")}';
 
-  //   final request = http.MultipartRequest('POST', url);
-  //   request.headers['Authorization'] = token;
+//     final request = http.MultipartRequest('POST', url);
+//     request.headers['Authorization'] = token;
 
-  //   request.files.add(await http.MultipartFile.fromPath(
-  //     'file',
-  //     image.path,
-  //     filename: path.basename(image.path),
-  //   ));
+//     request.files.add(await http.MultipartFile.fromPath(
+//       'file',
+//       image.path,
+//       filename: path.basename(image.path),
+//     ));
 
-  //   try {
-  //     print("Posting image to the backend");
-  //     final response = await request.send();
-  //     final responseData = await http.Response.fromStream(response);
-  //     if (response.statusCode == 200) {
-  //       var res = json.decode(responseData.body);
-  //       ktpResult.value = res;
-  //       update();
-  //     } else {
-  //       print('Error response: ${responseData.body}');
-  //     }
-  //   } catch (e) {
-  //     print('Error: $e');
-  //   }
-  // }
+//     try {
+//       final response = await request.send();
+
+//       if (response.statusCode == 200) {
+//         final responseData = await response.stream.bytesToString();
+//         print('Success: $responseData');
+//         var res = json.decode(responseData);
+//         nerResult.value = res;
+//         update();
+//       } else {
+//         print('Failed: ${response.statusCode}');
+//       }
+//     } catch (e) {
+//       print('Error: $e');
+//     }
+//   }
 }
