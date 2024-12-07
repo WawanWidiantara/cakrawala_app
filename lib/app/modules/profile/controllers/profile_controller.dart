@@ -1,3 +1,4 @@
+import 'package:cakrawala_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
@@ -20,4 +21,8 @@ class ProfileController extends GetxController {
   }
 
   void increment() => count.value++;
+
+  void logout() {
+    Get.offAllNamed(Routes.ON_BOARDING);
+  }
 }
