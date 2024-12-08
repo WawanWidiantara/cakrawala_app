@@ -31,6 +31,7 @@ class LoginView extends GetView<LoginController> {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Form(
+              key: controller.formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
