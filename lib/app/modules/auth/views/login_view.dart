@@ -12,22 +12,22 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(LoginController());
-    return Scaffold(
-      backgroundColor: AppColors.mainBackground,
-      appBar: AppBar(
-        title: const Text(
-          'CAKRAWALA',
-          style: TextStyle(
-            color: AppColors.mainBackground,
-            fontWeight: FontWeight.bold,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.mainBackground,
+        appBar: AppBar(
+          title: const Text(
+            'CAKRAWALA',
+            style: TextStyle(
+              color: AppColors.mainBackground,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          centerTitle: true,
+          backgroundColor: AppColors.primaryColor,
+          iconTheme: const IconThemeData(color: AppColors.mainBackground),
         ),
-        centerTitle: true,
-        backgroundColor: AppColors.primaryColor,
-        iconTheme: const IconThemeData(color: AppColors.mainBackground),
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Form(

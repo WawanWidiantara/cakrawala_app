@@ -12,21 +12,21 @@ class FavoriteView extends GetView<FavoriteController> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(FavoriteController());
-    return Scaffold(
-      backgroundColor: AppColors.mainBackground,
-      appBar: AppBar(
-        title: const Text(
-          'CAKRAWALA',
-          style: TextStyle(
-            color: AppColors.mainBackground,
-            fontWeight: FontWeight.bold,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.mainBackground,
+        appBar: AppBar(
+          title: const Text(
+            'CAKRAWALA',
+            style: TextStyle(
+              color: AppColors.mainBackground,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          centerTitle: true,
+          backgroundColor: AppColors.primaryColor,
         ),
-        centerTitle: true,
-        backgroundColor: AppColors.primaryColor,
-      ),
-      body: SafeArea(
-        child: Padding(
+        body: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

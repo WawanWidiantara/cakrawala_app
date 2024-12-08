@@ -12,17 +12,17 @@ class ProductView extends GetView<ProductController> {
   @override
   Widget build(BuildContext context) {
     final argument = Get.arguments;
-    return Scaffold(
-      backgroundColor: AppColors.mainBackground,
-      appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: AppColors.mainBackground,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.mainBackground,
+        appBar: AppBar(
+          iconTheme: const IconThemeData(
+            color: AppColors.mainBackground,
+          ),
+          centerTitle: true,
+          backgroundColor: AppColors.primaryColor,
         ),
-        centerTitle: true,
-        backgroundColor: AppColors.primaryColor,
-      ),
-      body: SafeArea(
-        child: Column(
+        body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(

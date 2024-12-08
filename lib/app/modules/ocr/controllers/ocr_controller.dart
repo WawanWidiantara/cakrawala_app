@@ -1,18 +1,23 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:cakrawala_app/app/core/components/snackbar.dart';
+import 'package:cakrawala_app/app/core/constants/url.dart';
 import 'package:cakrawala_app/app/modules/ocr/views/ocr_result_view.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class OcrController extends GetxController {
-  //TODO: Implement OcrController
   var selectedImage = ''.obs;
-  File? receiptImage;
-  var ktpResult = {}.obs;
+  File? ktpImage;
+  var ktp = ''.obs;
+  var ocrResult = {}.obs;
+  var isLoading = false.obs; // Reactive variable for loading state
 
   final count = 0.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -35,42 +40,79 @@ class OcrController extends GetxController {
     final pickedFile = await picker.pickImage(source: imageSource);
 
     if (pickedFile != null) {
+      ocrResult.clear();
       File receiptImage = File(pickedFile.path);
       selectedImage.value = pickedFile.path.toString();
-      ktpResult.clear();
-      Get.to(arguments: ktpResult, () => const OcrResultView());
+
+      XFile? compressedImage = await compressImage(receiptImage);
+
+      if (compressedImage != null) {
+        await sendImage(compressedImage);
+      } else {
+        SnackBarWidget.showSnackBar(
+          'Transaksi Gagal',
+          'Error: Image compression failed.',
+          'err',
+        );
+      }
     } else {
-      print('No image selected.');
+      SnackBarWidget.showSnackBar(
+        'Transaksi Gagal',
+        'Error: No image selected.',
+        'err',
+      );
     }
   }
 
-//  Future<void> sendImage(File image) async {
-//     var url = Uri.parse("${UrlApi.baseAPI}/extract/");
-//     var token = 'Bearer ${loginController.getStorage.read("access_token")}';
+  Future<XFile?> compressImage(File image) async {
+    final compressedImagePath =
+        '${path.dirname(image.path)}/compressed_${path.basename(image.path)}';
 
-//     final request = http.MultipartRequest('POST', url);
-//     request.headers['Authorization'] = token;
+    var result = await FlutterImageCompress.compressAndGetFile(
+      image.absolute.path,
+      compressedImagePath,
+      quality: 100, // Adjust the quality as needed
+    );
 
-//     request.files.add(await http.MultipartFile.fromPath(
-//       'file',
-//       image.path,
-//       filename: path.basename(image.path),
-//     ));
+    return result;
+  }
 
-//     try {
-//       final response = await request.send();
+  /// Send the image to the OCR API endpoint
+  Future<void> sendImage(XFile image) async {
+    var url = Uri.parse("${UrlApi.baseAPI}/upload/id-card");
+    final request = http.MultipartRequest('POST', url);
+    request.files.add(await http.MultipartFile.fromPath(
+      'id_card',
+      image.path,
+      filename: path.basename(image.path),
+    ));
 
-//       if (response.statusCode == 200) {
-//         final responseData = await response.stream.bytesToString();
-//         print('Success: $responseData');
-//         var res = json.decode(responseData);
-//         nerResult.value = res;
-//         update();
-//       } else {
-//         print('Failed: ${response.statusCode}');
-//       }
-//     } catch (e) {
-//       print('Error: $e');
-//     }
-//   }
+    try {
+      isLoading.value = true; // Start loading
+      final response = await request.send();
+      final responseData = await response.stream.bytesToString();
+
+      if (response.statusCode < 300) {
+        var res = json.decode(responseData);
+        ocrResult.value = res["data"];
+        update();
+        Get.to(arguments: ocrResult, () => const OcrResultView());
+      } else {
+        var errorMessage = json.decode(responseData);
+        SnackBarWidget.showSnackBar(
+          'Gagal mengirim gambar',
+          'Error: ${errorMessage['error']}',
+          'err',
+        );
+      }
+    } catch (e) {
+      SnackBarWidget.showSnackBar(
+        'Transaksi Gagal',
+        'Execption: $e',
+        'err',
+      );
+    } finally {
+      isLoading.value = false; // Stop loading
+    }
+  }
 }

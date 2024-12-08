@@ -14,21 +14,32 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.mainBackground,
-      appBar: AppBar(
-        title: const Text(
-          'CAKRAWALA',
-          style: TextStyle(
-            color: AppColors.mainBackground,
-            fontWeight: FontWeight.bold,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.mainBackground,
+        appBar: AppBar(
+          title: const Text(
+            'CAKRAWALA',
+            style: TextStyle(
+              color: AppColors.mainBackground,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Get.toNamed(Routes.NOTIFICATION);
+              },
+              icon: const Icon(
+                Icons.notifications_none_rounded,
+                color: AppColors.white,
+              ),
+            ),
+          ],
+          centerTitle: true,
+          backgroundColor: AppColors.primaryColor,
         ),
-        centerTitle: true,
-        backgroundColor: AppColors.primaryColor,
-      ),
-      body: SafeArea(
-        child: Column(
+        body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(

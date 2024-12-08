@@ -12,25 +12,26 @@ class RegisterView extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(RegisterController());
-    return Scaffold(
-      backgroundColor: AppColors.mainBackground,
-      appBar: AppBar(
-        title: const Text(
-          'CAKRAWALA',
-          style: TextStyle(
-            color: AppColors.mainBackground,
-            fontWeight: FontWeight.bold,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.mainBackground,
+        appBar: AppBar(
+          title: const Text(
+            'CAKRAWALA',
+            style: TextStyle(
+              color: AppColors.mainBackground,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          centerTitle: true,
+          backgroundColor: AppColors.primaryColor,
+          iconTheme: const IconThemeData(color: AppColors.mainBackground),
         ),
-        centerTitle: true,
-        backgroundColor: AppColors.primaryColor,
-        iconTheme: const IconThemeData(color: AppColors.mainBackground),
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Form(
+              key: controller.formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,9 +51,21 @@ class RegisterView extends GetView<RegisterController> {
                       }),
                   const SizedBox(height: 20),
                   FormWidget(
+                      controller: controller.phoneController,
+                      label: 'Phone Number',
+                      isObsecured: false,
+                      keyboardType: TextInputType.text,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your phone number';
+                        }
+                        return null;
+                      }),
+                  const SizedBox(height: 20),
+                  FormWidget(
                       controller: controller.passwordController,
                       label: 'Password',
-                      isObsecured: false,
+                      isObsecured: true,
                       keyboardType: TextInputType.text,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -62,9 +75,9 @@ class RegisterView extends GetView<RegisterController> {
                       }),
                   const SizedBox(height: 20),
                   FormWidget(
-                      controller: controller.passwordController,
+                      controller: controller.confirmPasswordController,
                       label: 'Confirm Password',
-                      isObsecured: false,
+                      isObsecured: true,
                       keyboardType: TextInputType.text,
                       validator: (value) {
                         if (value == null || value.isEmpty) {

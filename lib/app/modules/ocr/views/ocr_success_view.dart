@@ -11,38 +11,39 @@ class OcrSuccessView extends GetView {
   const OcrSuccessView({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.mainBackground,
-      body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const ImageSuccess(),
-            const SizedBox(height: 16),
-            const Headline(),
-            const SizedBox(height: 64),
-            Button(
-              label: 'Go to Home',
-              type: ButtonType.primary,
-              state: ButtonState.enabled,
-              onPressed: () {
-                Get.offAllNamed(Routes.NAVBAR);
-              },
-            ),
-            Button(
-              label: 'View Profile',
-              type: ButtonType.tertiary,
-              state: ButtonState.enabled,
-              onPressed: () {
-                Get.offAllNamed(arguments: 2, Routes.NAVBAR);
-              },
-            ),
-          ],
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.mainBackground,
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const ImageSuccess(),
+              const SizedBox(height: 16),
+              const Headline(),
+              const SizedBox(height: 64),
+              Button(
+                label: 'Go to Home',
+                type: ButtonType.primary,
+                state: ButtonState.enabled,
+                onPressed: () {
+                  Get.offAllNamed(Routes.NAVBAR);
+                },
+              ),
+              Button(
+                label: 'View Profile',
+                type: ButtonType.tertiary,
+                state: ButtonState.enabled,
+                onPressed: () {
+                  Get.offAllNamed(arguments: 2, Routes.NAVBAR);
+                },
+              ),
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }

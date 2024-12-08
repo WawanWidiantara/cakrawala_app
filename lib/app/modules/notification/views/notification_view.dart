@@ -9,18 +9,20 @@ class NotificationView extends GetView<NotificationController> {
   const NotificationView({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.mainBackground,
-      appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: AppColors.mainBackground,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.mainBackground,
+        appBar: AppBar(
+          iconTheme: const IconThemeData(
+            color: AppColors.mainBackground,
+          ),
+          backgroundColor: AppColors.primaryColor,
         ),
-        backgroundColor: AppColors.primaryColor,
-      ),
-      body: const Center(
-        child: Text(
-          'NotificationView is working',
-          style: TextStyle(fontSize: 20),
+        body: const Center(
+          child: Text(
+            'NotificationView is working',
+            style: TextStyle(fontSize: 20),
+          ),
         ),
       ),
     );

@@ -12,21 +12,21 @@ class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ProfileController());
-    return Scaffold(
-      backgroundColor: AppColors.mainBackground,
-      appBar: AppBar(
-        title: const Text(
-          'CAKRAWALA',
-          style: TextStyle(
-            color: AppColors.mainBackground,
-            fontWeight: FontWeight.bold,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.mainBackground,
+        appBar: AppBar(
+          title: const Text(
+            'CAKRAWALA',
+            style: TextStyle(
+              color: AppColors.mainBackground,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          centerTitle: true,
+          backgroundColor: AppColors.primaryColor,
         ),
-        centerTitle: true,
-        backgroundColor: AppColors.primaryColor,
-      ),
-      body: SafeArea(
-        child: Padding(
+        body: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
             children: <Widget>[
@@ -111,17 +111,17 @@ class ProfileView extends GetView<ProfileController> {
             ],
           ),
         ),
-      ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: SizedBox(
-          width: double.infinity,
-          child: LogOutButton(onPressed: () {
-            controller.logout();
-          }),
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: SizedBox(
+            width: double.infinity,
+            child: LogOutButton(onPressed: () {
+              controller.logout();
+            }),
+          ),
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

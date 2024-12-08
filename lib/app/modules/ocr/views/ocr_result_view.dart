@@ -4,7 +4,6 @@ import 'package:cakrawala_app/app/core/constants/colors.dart';
 import 'package:cakrawala_app/app/core/constants/text_styles.dart';
 import 'package:cakrawala_app/app/modules/ocr/controllers/ocr_result_controller.dart';
 import 'package:cakrawala_app/app/modules/ocr/views/ocr_success_view.dart';
-import 'package:cakrawala_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -14,22 +13,22 @@ class OcrResultView extends GetView<OcrResultController> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(OcrResultController());
-    return Scaffold(
-      backgroundColor: AppColors.mainBackground,
-      appBar: AppBar(
-        title: const Text(
-          'CAKRAWALA',
-          style: TextStyle(
-            color: AppColors.mainBackground,
-            fontWeight: FontWeight.bold,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.mainBackground,
+        appBar: AppBar(
+          title: const Text(
+            'CAKRAWALA',
+            style: TextStyle(
+              color: AppColors.mainBackground,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          centerTitle: true,
+          backgroundColor: AppColors.primaryColor,
+          iconTheme: const IconThemeData(color: AppColors.mainBackground),
         ),
-        centerTitle: true,
-        backgroundColor: AppColors.primaryColor,
-        iconTheme: const IconThemeData(color: AppColors.mainBackground),
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Form(
@@ -42,13 +41,15 @@ class OcrResultView extends GetView<OcrResultController> {
                   Container(
                     height: 200,
                     decoration: BoxDecoration(
-                      image: const DecorationImage(
-                        image: AssetImage('assets/images/on-boarding-1.jpg'),
+                      image: DecorationImage(
+                        image: NetworkImage(controller.ocrResult[
+                            "ktp_url"]), // Replace with your image URL
                         fit: BoxFit.cover,
                       ),
                       borderRadius: BorderRadius.circular(7),
                     ),
                   ),
+
                   const SizedBox(height: 32),
                   FormWidget(
                       controller: controller.nikController,

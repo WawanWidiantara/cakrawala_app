@@ -20,10 +20,37 @@ class OcrResultController extends GetxController {
   final TextEditingController occupationController = TextEditingController();
   final TextEditingController nationalityController = TextEditingController();
 
+  var ocrResult = Get.arguments;
+  RxBool isLoading = false.obs;
+
   final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
+
+    // Populate the form fields based on OCR result
+    if (ocrResult != null) {
+      nikController.text = ocrResult['nik'] ?? '';
+      nameController.text = ocrResult['nama'] ?? '';
+      addressController.text = ocrResult['alamat'] ?? '';
+      villageController.text = ocrResult['kel_desa'] ?? '';
+      districtController.text = ocrResult['kecamatan'] ?? '';
+      regencyController.text = ''; // This key doesn't exist, add a fallback
+      provinceController.text = ''; // This key doesn't exist, add a fallback
+      religionController.text = ocrResult['agama'] ?? '';
+      maritalController.text = ocrResult['status_perkawinan'] ?? '';
+      occupationController.text = ocrResult['pekerjaan'] ?? '';
+      nationalityController.text = ocrResult['kewarganegaraan'] ?? '';
+      genderPlaceController.text = ocrResult['jenis_kelamin'] ?? '';
+      rtrwController.text = ''; // If no specific RT/RW in the response
+      if (ocrResult['tempat_tgl_lahir'] != null) {
+        final birthInfo = ocrResult['tempat_tgl_lahir'].split(' ');
+        if (birthInfo.length > 1) {
+          birthPlaceController.text = birthInfo[0];
+          dobController.text = birthInfo.sublist(1).join(' ');
+        }
+      }
+    }
   }
 
   @override

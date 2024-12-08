@@ -13,58 +13,64 @@ class OcrView extends GetView<OcrController> {
   const OcrView({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.mainBackground,
-      appBar: AppBar(
-        title: const Text(
-          'CAKRAWALA',
-          style: TextStyle(
-            color: AppColors.mainBackground,
-            fontWeight: FontWeight.bold,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.mainBackground,
+        appBar: AppBar(
+          title: const Text(
+            'CAKRAWALA',
+            style: TextStyle(
+              color: AppColors.mainBackground,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          centerTitle: true,
+          backgroundColor: AppColors.primaryColor,
+          iconTheme: const IconThemeData(color: AppColors.mainBackground),
         ),
-        centerTitle: true,
-        backgroundColor: AppColors.primaryColor,
-        iconTheme: const IconThemeData(color: AppColors.mainBackground),
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Headline(),
-              const SizedBox(height: 32),
-              Center(
-                child: SvgPicture.asset(
-                  'assets/images/pick-image.svg',
-                  height: 300,
+        body: Obx(
+          () => controller.isLoading.value
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Headline(),
+                      const SizedBox(height: 32),
+                      Center(
+                        child: SvgPicture.asset(
+                          'assets/images/pick-image.svg',
+                          height: 300,
+                        ),
+                      ),
+                      const SizedBox(height: 64),
+                      Button(
+                        label: 'Open Camera',
+                        type: ButtonType.primary,
+                        state: ButtonState.enabled,
+                        onPressed: () {
+                          controller.getKTPImage(
+                            ImageSource.camera,
+                          );
+                        },
+                      ),
+                      Button(
+                        label: 'Upload from Gallery',
+                        type: ButtonType.tertiary,
+                        state: ButtonState.enabled,
+                        onPressed: () {
+                          controller.getKTPImage(
+                            ImageSource.gallery,
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(height: 64),
-              Button(
-                label: 'Open Camera',
-                type: ButtonType.primary,
-                state: ButtonState.enabled,
-                onPressed: () {
-                  controller.getKTPImage(
-                    ImageSource.camera,
-                  );
-                },
-              ),
-              Button(
-                label: 'Upload from Gallery',
-                type: ButtonType.tertiary,
-                state: ButtonState.enabled,
-                onPressed: () {
-                  controller.getKTPImage(
-                    ImageSource.gallery,
-                  );
-                },
-              ),
-            ],
-          ),
         ),
       ),
     );

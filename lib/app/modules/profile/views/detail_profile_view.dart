@@ -8,70 +8,71 @@ class DetailProfileView extends GetView {
   const DetailProfileView({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.mainBackground,
-      appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: AppColors.mainBackground,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.mainBackground,
+        appBar: AppBar(
+          iconTheme: const IconThemeData(
+            color: AppColors.mainBackground,
+          ),
+          backgroundColor: AppColors.primaryColor,
         ),
-        backgroundColor: AppColors.primaryColor,
-      ),
-      body: SafeArea(
-          child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                height: 200,
-                decoration: BoxDecoration(
-                  image: const DecorationImage(
-                    image: AssetImage('assets/images/on-boarding-1.jpg'),
-                    fit: BoxFit.cover,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  height: 200,
+                  decoration: BoxDecoration(
+                    image: const DecorationImage(
+                      image: AssetImage('assets/images/on-boarding-1.jpg'),
+                      fit: BoxFit.cover,
+                    ),
+                    borderRadius: BorderRadius.circular(7),
                   ),
-                  borderRadius: BorderRadius.circular(7),
                 ),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                "My Personal Data",
-                style: AppTypography.bodyMedium.copyWith(
-                  fontWeight: FontWeight.bold,
+                const SizedBox(height: 16),
+                Text(
+                  "My Personal Data",
+                  style: AppTypography.bodyMedium.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.circular(8),
+                const SizedBox(height: 16),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Column(
+                    children: [
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: 15,
+                        itemBuilder: (context, index) {
+                          // final titleList = ["NIK", "Name", "Place of Birth", "Date of Birth", "Gender", ];
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4.0),
+                            child: PersonalItem(
+                              title: "title",
+                              value: "value",
+                            ),
+                          );
+                        },
+                      )
+                    ],
+                  ),
                 ),
-                child: Column(
-                  children: [
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: 15,
-                      itemBuilder: (context, index) {
-                        // final titleList = ["NIK", "Name", "Place of Birth", "Date of Birth", "Gender", ];
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4.0),
-                          child: PersonalItem(
-                            title: "title",
-                            value: "value",
-                          ),
-                        );
-                      },
-                    )
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      )),
+      ),
     );
   }
 }

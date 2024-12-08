@@ -11,17 +11,17 @@ class DetailProductView extends GetView {
   const DetailProductView({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.mainBackground,
-      appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: AppColors.mainBackground,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.mainBackground,
+        appBar: AppBar(
+          iconTheme: const IconThemeData(
+            color: AppColors.mainBackground,
+          ),
+          centerTitle: true,
+          backgroundColor: AppColors.primaryColor,
         ),
-        centerTitle: true,
-        backgroundColor: AppColors.primaryColor,
-      ),
-      body: SafeArea(
-        child: Padding(
+        body: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,26 +37,26 @@ class DetailProductView extends GetView {
             ],
           ),
         ),
-      ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: SizedBox(
-          width: double.infinity,
-          child: Button(
-            label: 'Rent Now',
-            type: ButtonType.primary,
-            state: ButtonState.enabled,
-            onPressed: () {
-              SnackBarWidget.showSnackBar(
-                "Success Rent Car",
-                "Your Will be Contacted Soon",
-                "succ",
-              );
-            },
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: SizedBox(
+            width: double.infinity,
+            child: Button(
+              label: 'Rent Now',
+              type: ButtonType.primary,
+              state: ButtonState.enabled,
+              onPressed: () {
+                SnackBarWidget.showSnackBar(
+                  "Success Rent Car",
+                  "Your Will be Contacted Soon",
+                  "succ",
+                );
+              },
+            ),
           ),
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
