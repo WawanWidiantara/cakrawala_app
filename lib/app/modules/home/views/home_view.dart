@@ -64,7 +64,7 @@ class HomeView extends GetView<HomeController> {
                           title: "Best Seller", arguments: "All Best Seller"),
                       const SizedBox(height: 20),
                       SizedBox(
-                        height: Get.width * 0.55,
+                        height: Get.width * 0.6,
                         child: ListView.builder(
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
@@ -99,7 +99,7 @@ class HomeView extends GetView<HomeController> {
                               16, // Horizontal spacing between items
                           mainAxisSpacing: 16, // Vertical spacing between items
                           childAspectRatio:
-                              1, // Width-to-height ratio of each item
+                              1 / 1.15, // Width-to-height ratio of each item
                         ),
                         itemCount: 6,
                         itemBuilder: (context, index) {
@@ -215,13 +215,12 @@ class CarCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const CarCardInfo(),
-                CarCardButton(onPressed: onPressed),
+                CarCardInfo(),
               ],
             ),
           ),
@@ -247,7 +246,7 @@ class FavoriteCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Get.height * 0.3,
+      width: Get.height * 0.4,
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(8),
@@ -370,7 +369,7 @@ class CarCardInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          width: Get.width * 0.15,
+          width: Get.width * 0.3,
           child: Text(
             "All New Honda Civic",
             style: AppTypography.bodyMedium.copyWith(
@@ -382,7 +381,7 @@ class CarCardInfo extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         SizedBox(
-          width: Get.width * 0.15,
+          width: Get.width * 0.3,
           child: Text(
             "Rp. 500.000.000/day",
             style: AppTypography.bodySmall,
@@ -429,7 +428,6 @@ class CardInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          width: Get.width * 0.27,
           child: Text(
             "All New Honda Civic",
             style: AppTypography.bodyMedium.copyWith(
@@ -441,7 +439,6 @@ class CardInfo extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         SizedBox(
-          width: Get.width * 0.27,
           child: Text(
             "Rp. 500.000.000/day",
             style: AppTypography.bodySmall,
@@ -462,7 +459,7 @@ class CardImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
+      height: 140,
       decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/images/on-boarding-1.jpg'),

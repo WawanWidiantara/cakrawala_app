@@ -96,7 +96,17 @@ class OcrController extends GetxController {
         var res = json.decode(responseData);
         ocrResult.value = res["data"];
         update();
-        Get.to(arguments: ocrResult, () => const OcrResultView());
+        List keys = ocrResult.keys.toList();
+        if (ocrResult.isNotEmpty && keys.length >= 14) {
+          Get.to(arguments: ocrResult, () => const OcrResultView());
+        } else {
+          SnackBarWidget.showSnackBar(
+            'Transaksi Gagal',
+            'Invalid ID Card data',
+            'err',
+          );
+          isLoading.value = false;
+        }
       } else {
         var errorMessage = json.decode(responseData);
         SnackBarWidget.showSnackBar(

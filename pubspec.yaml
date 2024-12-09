@@ -12,6 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_image_compress: ^2.3.0
+  flutter_launcher_icons: ^0.14.2
+  flutter_native_splash: ^2.4.0
   flutter_svg: ^2.0.16
   get: ^4.6.6
   get_storage: ^2.1.1
@@ -27,6 +29,22 @@ dev_dependencies:
   flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
+
+flutter_native_splash:
+  color: "#3253BD"
+  image: assets/images/splash.png
+  android: true
+  android_12:
+    color: "#3253BD"
+    image: assets/images/splash.png
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/splash.png"
+  adaptive_icon_background: "#3253BD"
+  adaptive_icon_foreground: "assets/images/splash.png"
+  min_sdk_android: 21
 
 flutter:
   uses-material-design: true

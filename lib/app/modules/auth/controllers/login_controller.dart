@@ -56,11 +56,35 @@ class LoginController extends GetxController {
         getStorage.write('token', data['token']);
         getStorage.write('user', data['data']["id_account"]);
         SnackBarWidget.showSnackBar('Success', "Welcome Back", 'success');
-        Get.offAllNamed(Routes.NAVBAR);
+        await getUser();
       } else {
         final errorData = json.decode(response.body);
         SnackBarWidget.showSnackBar(
             'Error', errorData['message'] ?? 'Login failed', 'err');
+      }
+    } catch (e) {
+      SnackBarWidget.showSnackBar('Error', "$e", 'err');
+    }
+  }
+
+  Future<void> getUser() async {
+    final String? token = getStorage.read('token');
+    final String? user = getStorage.read('user');
+    final String url = '${UrlApi.baseAPI}/profile/$user';
+
+    try {
+      final response = await http.get(
+        Uri.parse(url),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token'
+        },
+      );
+
+      if (response.statusCode < 300) {
+        final data = json.decode(response.body);
+        getStorage.write('user_details', data["data"]);
+        Get.offAllNamed(Routes.NAVBAR);
       }
     } catch (e) {
       SnackBarWidget.showSnackBar('Error', "$e", 'err');

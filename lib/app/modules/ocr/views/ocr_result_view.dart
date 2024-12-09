@@ -3,7 +3,6 @@ import 'package:cakrawala_app/app/core/components/forms.dart';
 import 'package:cakrawala_app/app/core/constants/colors.dart';
 import 'package:cakrawala_app/app/core/constants/text_styles.dart';
 import 'package:cakrawala_app/app/modules/ocr/controllers/ocr_result_controller.dart';
-import 'package:cakrawala_app/app/modules/ocr/views/ocr_success_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -49,7 +48,15 @@ class OcrResultView extends GetView<OcrResultController> {
                       borderRadius: BorderRadius.circular(7),
                     ),
                   ),
-
+                  const SizedBox(height: 32),
+                  Container(
+                    alignment: Alignment.center,
+                    child: CircleAvatar(
+                      radius: 50,
+                      backgroundImage:
+                          NetworkImage(controller.ocrResult["photo_url"]),
+                    ),
+                  ),
                   const SizedBox(height: 32),
                   FormWidget(
                       controller: controller.nikController,
@@ -98,6 +105,19 @@ class OcrResultView extends GetView<OcrResultController> {
                         }
                         return null;
                       }),
+                  const SizedBox(height: 16),
+                  FormWidget(
+                      controller: controller.genderPlaceController,
+                      label: 'Jenis Kelamin',
+                      isObsecured: false,
+                      keyboardType: TextInputType.text,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter gender';
+                        }
+                        return null;
+                      }),
+                  const SizedBox(height: 16),
                   FormWidget(
                       controller: controller.addressController,
                       label: 'Alamat',
@@ -258,12 +278,9 @@ class OcrResultView extends GetView<OcrResultController> {
                                         state: ButtonState.enabled,
                                         onPressed: () {
                                           Navigator.pop(context);
-                                          Get.offAll(
-                                            () => const OcrSuccessView(),
-                                            transition: Transition.fadeIn,
-                                            duration: const Duration(
-                                              milliseconds: 500,
-                                            ),
+                                          controller.saveProfile(
+                                            controller.ocrResult["ktp_url"],
+                                            controller.ocrResult["photo_url"],
                                           );
                                         },
                                       ),

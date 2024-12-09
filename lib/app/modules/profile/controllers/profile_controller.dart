@@ -1,12 +1,17 @@
 import 'package:cakrawala_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ProfileController extends GetxController {
-  //TODO: Implement ProfileController
+  final box = GetStorage();
+  var userDetails = {}.obs;
 
   final count = 0.obs;
   @override
   void onInit() {
+    var user = box.read('user_details');
+    userDetails.value = user;
+    update();
     super.onInit();
   }
 
@@ -23,6 +28,7 @@ class ProfileController extends GetxController {
   void increment() => count.value++;
 
   void logout() {
+    box.erase();
     Get.offAllNamed(Routes.ON_BOARDING);
   }
 }
