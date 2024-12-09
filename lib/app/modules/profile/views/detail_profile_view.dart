@@ -1,5 +1,6 @@
 import 'package:cakrawala_app/app/core/constants/colors.dart';
 import 'package:cakrawala_app/app/core/constants/text_styles.dart';
+import 'package:cakrawala_app/app/modules/profile/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -8,6 +9,7 @@ class DetailProfileView extends GetView {
   const DetailProfileView({super.key});
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<ProfileController>();
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.mainBackground,
@@ -26,8 +28,9 @@ class DetailProfileView extends GetView {
                 Container(
                   height: 200,
                   decoration: BoxDecoration(
-                    image: const DecorationImage(
-                      image: AssetImage('assets/images/on-boarding-1.jpg'),
+                    image: DecorationImage(
+                      image: NetworkImage(controller.userDetails["ktp_url"] ??
+                          'assets/images/on-boarding-1.jpg'),
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.circular(7),
@@ -53,16 +56,45 @@ class DetailProfileView extends GetView {
                       ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 15,
+                        itemCount: 21,
                         itemBuilder: (context, index) {
-                          // final titleList = ["NIK", "Name", "Place of Birth", "Date of Birth", "Gender", ];
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 4.0),
-                            child: PersonalItem(
-                              title: "title",
-                              value: "value",
-                            ),
-                          );
+                          List keys = [
+                            "id",
+                            "email",
+                            "phone",
+                            "nik",
+                            "name",
+                            "pob",
+                            "dob",
+                            "gender",
+                            "religion",
+                            "marital_status",
+                            "occupation",
+                            "nationality",
+                            "photo_url",
+                            "ktp_url",
+                            "address",
+                            "province",
+                            "city",
+                            "subdistrict",
+                            "village",
+                            "rt",
+                            "rw"
+                          ];
+                          if (keys[index] == "ktp_url" ||
+                              keys[index] == "photo_url" ||
+                              keys[index] == "id") {
+                            return const SizedBox();
+                          } else {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 4.0),
+                              child: PersonalItem(
+                                title: keys[index].toString(),
+                                value: controller.userDetails[keys[index]],
+                              ),
+                            );
+                          }
                         },
                       )
                     ],
@@ -101,7 +133,7 @@ class PersonalItem extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: Get.width * 0.4,
+          width: Get.width * 0.49,
           child: Text(
             value,
             style: AppTypography.bodyMedium.copyWith(
