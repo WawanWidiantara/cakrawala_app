@@ -90,8 +90,9 @@ class DetailProfileView extends GetView {
                               padding:
                                   const EdgeInsets.symmetric(vertical: 4.0),
                               child: PersonalItem(
-                                title: keys[index].toString(),
-                                value: controller.userDetails[keys[index]],
+                                title: keys[index]?.toString() ?? "-",
+                                value:
+                                    controller.userDetails[keys[index]] ?? "-",
                               ),
                             );
                           }
